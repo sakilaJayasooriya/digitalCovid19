@@ -33,7 +33,7 @@
 <div class="container-fluid mt-5 pt-5 pb-5">
 	<div class="row pt-5">
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pt-5">
-			<div class="shadow-sm border userbox">
+			<div class="shadow-sm border userbox fnt-green">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
 				<a class="fnt-green" href="user_profile.php"><i class="fas fa-user"></i> Profile</a><br>
 				<a class="fnt-green" href="user_symptoms.php"><i class="fas fa-heartbeat"></i> My Symptoms</a><br>
@@ -46,8 +46,106 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5">
-			<img class="img-fluid" src="img/map.jpg">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5 fnt-gray">
+			<h2 class="fnt-green">Connection Requests</h2><br>
+			<div class="container-fluid pb-5">
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Family</small><br>
+						Nimesha Hewawasm
+					</p>
+					<a class="btn btn-sm btn-green" href="user_network.php?id=1&action=confirm">Accept</a>
+					<a class="btn btn-sm btn-secondary" href="user_network.php?id=1&action=confirm">Reject</a>
+				</div>
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Relative</small><br>
+						Sakila Jayasooriy
+					</p>
+					<a class="btn btn-sm btn-green" href="user_network.php?id=1&action=confirm">Accept</a>
+					<a class="btn btn-sm btn-secondary" href="user_network.php?id=1&action=confirm">Reject</a>
+				</div>
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Friend</small><br>
+						Karunharn Bavaram
+					</p>
+					<a class="btn btn-sm btn-green" href="user_network.php?id=1&action=confirm">Accept</a>
+					<a class="btn btn-sm btn-secondary" href="user_network.php?id=1&action=confirm">Reject</a>
+				</div>
+			</div>
+			<h2 class="fnt-green">Add Connection</h2>
+			<div class="loginbox pl-3 pr-3">
+				<form action="network_editpage.php" method="post" role="form">
+				<div class="form-group pt-3">
+					<label>He/She is my?</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="family" name="relativeType" value="family">
+					    <label class="custom-control-label" for="family">Family</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="relative" name="relativeType" value="relative">
+					    <label class="custom-control-label" for="relative">Relative</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="friend" name="relativeType" value="friend">
+					    <label class="custom-control-label" for="friend">Friend</label>
+					</div>
+				</div>
+				<div class="form-group pt-4">
+					<label>Contact By?</label><br>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="rname" name="contactMethod" value="rname">
+					    <label class="custom-control-label" for="rname">Name</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="nic" name="contactMethod" value="nic">
+					    <label class="custom-control-label" for="nic">NIC</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="phone" name="contactMethod" value="phone">
+					    <label class="custom-control-label" for="phone">Phone</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+					    <input required type="radio" class="custom-control-input" id="email" name="contactMethod" value="email">
+					    <label class="custom-control-label" for="email">Email</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<input required type="text" name="contactDetail" id="contactDetail" class="form-control" placeholder="Put Selected Contact Detail">
+				</div>
+				<div class="form-group text-left">
+					<button type="submit" name="save-submit" id="btn_saveform" class="btn btn-green" value="save-submit">Request connection</button>
+				</div>
+			</form>
+			</div><br>
+			<h2 class="fnt-green">My Network</h2><br>
+			<div class="container-fluid">
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Family</small><br>
+						Nimesha Hewawasm
+					</p>
+				</div>
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Relative</small><br>
+						Sakila Jayasooriy
+					</p>
+				</div>
+				<div class="addedItems shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
+						<small>Friend</small><br>
+						Karunharn Bavaram
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -71,5 +169,37 @@
 <footer>
 <?php require_once 'layout/footer.php'; ?>
 </footer>
+<script type="text/javascript">
+$('#public').click(function() {
+      if ($(this).is(':checked')) {
+            $('#withWhom').prop('disabled', true);
+            $('#train').prop('disabled', false);
+            $('#bus').prop('disabled', false);
+            $('#busNumber').prop('disabled', false);
+            $('#route').prop('disabled', false);
+      }
+});
+$('#private').click(function() {
+      if ($(this).is(':checked')) {
+            $('#train').prop('disabled', true);
+            $('#bus').prop('disabled', true);
+            $('#busNumber').prop('disabled', true);
+            $('#route').prop('disabled', true);
+            $('#withWhom').prop('disabled', false);
+      }
+});
+$('#train').click(function() {
+      if ($(this).is(':checked')) {
+            $('#busNumber').prop('disabled', true);
+            $('#route').prop('disabled', true);
+      }
+});
+$('#bus').click(function() {
+      if ($(this).is(':checked')) {
+            $('#busNumber').prop('disabled', false);
+            $('#route').prop('disabled', false);
+      }
+});
+</script>
 </body>
 </html>

@@ -62,6 +62,17 @@ input[type=email]{
   border:solid 1px #4cad5c;
   padding: 20px;
 }
+input[type=date]{
+   -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  width: 100%;
+  min-height: 45px;
+  margin: 0 auto;
+  border: none; /* <-- This thing here */
+  border:solid 1px #4cad5c;
+  padding-left: 20px;
+}
 
 
 .btn{
@@ -92,19 +103,24 @@ input[type=email]{
 	color: #4cad5c;
 	text-decoration: none;
 }
-.fnt-green a:hover{
-	color: green;	
+a.fnt-green:hover{
+	color: green;
+	text-decoration: none;
 }
 
 .fnt-white{
 	color: #fff;
 	text-decoration: none;	
 }
-.fnt-white a:hover{
-	color: #eee;	
+a.fnt-white:hover{
+	color: #eee;
+	text-decoration: none;	
 }
 .fnt-gray{
 	color: gray;
+}
+.fnt-red{
+	color: red;
 }
 
 .profilePic{
@@ -128,4 +144,21 @@ input[type=email]{
   color: #fff;
   border-color: #4cad5c;
   background-color: #4cad5c;
+}
+
+.addedItems{
+	display: inline-block;
+	border: 1px solid #4cad5c;
+	border-radius: 20px;
+	margin: 5px 10px;
+}
+.notif-green{
+	border: 1px solid #4cad5c;
+	border-radius: 20px;
+	margin: 10px 10px;
+}
+.notif-red{
+	border: 1px solid red;
+	border-radius: 20px;
+	margin: 10px 10px;
 }

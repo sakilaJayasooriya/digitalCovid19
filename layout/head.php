@@ -10,7 +10,7 @@
 			  </button>
 			  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
 			    <ul class="navbar-nav mr-auto text-left">
-			      <li class="nav-item"><a style="" class="nav-link" href="/>">Home</a></li>
+			      <li class="nav-item"><a style="" class="nav-link" href="/">Home</a></li>
 				  <li class="nav-item"><a style="" class="nav-link" href="/signup.php">About Us</a></li>
 			      <li class="nav-item"><a style="" class="nav-link" href="/login.php">Contact Us</a></li>
 			    </ul>

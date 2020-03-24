@@ -46,8 +46,31 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 pt-5">
 			<img class="img-fluid" src="img/map.jpg">
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 pt-5">
+			<h2 class="fnt-green text-center">Activities</h2>
+			<div class="container-fluid pt-1 pb-5">
+				<div class="notif-red shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-red h2"><i class="fas fa-heartbeat"></i></span><br>
+						<small>12/12/2019 to 03/12/2020</small><br>
+						China visit<br>
+						Status: Not Safe at all<br>
+						Quarantine Immediately<br>
+					</p>
+				</div>
+				<div class="notif-green shadow-sm p-3 text-center">
+					<p>
+						<span class="fnt-green h2"><i class="fas fa-heartbeat"></i></span><br>
+						<small>12/12/2019</small><br>
+						Live In concert<br>
+						Status: Level 2<br>
+						Quarantine Immediately<br>
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
