@@ -26,6 +26,9 @@ body{
 	padding: 50px 20px;
 }
 
+.hidden{
+	display: none;
+}
 input[type=text]{
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -63,7 +66,7 @@ input[type=email]{
 
 .btn{
 	border-radius: 25px;
-	padding: 10px 15px;
+	padding: 10px 35px;
 }
 .btn-green{
 	background-color: #4cad5c;
@@ -89,7 +92,7 @@ input[type=email]{
 	color: #4cad5c;
 	text-decoration: none;
 }
-.fnt-green:hover{
+.fnt-green a:hover{
 	color: green;	
 }
 
@@ -97,8 +100,11 @@ input[type=email]{
 	color: #fff;
 	text-decoration: none;	
 }
-.fnt-white:hover{
+.fnt-white a:hover{
 	color: #eee;	
+}
+.fnt-gray{
+	color: gray;
 }
 
 .profilePic{
@@ -116,4 +122,10 @@ input[type=email]{
 	padding-right: 60px;
 	background-color: #fff;
 	color: #4cad5c;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #4cad5c;
+  background-color: #4cad5c;
 }

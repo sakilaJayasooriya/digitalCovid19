@@ -59,7 +59,7 @@
 								<label for="remember"> Remember Me</label>
 							</div>
 							<div class="form-group text-center">
-								<button type="submit" name="login-submit" id="login-submit" tabindex="4" class="btn btn-green pl-5 pr-5" value="Log In">Log In</button>
+								<button type="submit" name="login-submit" id="login-submit" tabindex="4" class="btn btn-green" value="Log In">Log In</button>
 							</div>
 							<div class="form-group">
 								<div class="text-center fnt-green">
@@ -89,7 +89,7 @@
 								<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
 							</div>
 							<div class="form-group text-center">
-								<button type="submit" name="register-submit" id="register-submit" tabindex="4" class="btn btn-green pl-5 pr-5" value="Register Now">Register Now</button>
+								<button type="submit" name="register-submit" id="register-submit" tabindex="4" class="btn btn-green" value="Register Now">Register Now</button>
 							</div>
 						</form>
 				    </div>

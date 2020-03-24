@@ -47,7 +47,27 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5">
-			<img class="img-fluid" src="img/map.jpg">
+			<h2 class="fnt-green">My Profile Details</h2><br>
+			<div class="loginbox">
+				<form action="profile_editpage.php" method="post" role="form" id="editform">
+				<div class="form-group">
+					<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="Sakila jayasooriya">
+				</div>
+				<div class="form-group">
+					<input type="text" name="nic" id="nic" tabindex="1" class="form-control" placeholder="NIC Number" value="941881513V">
+				</div>
+				<div class="form-group">
+					<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="sales4shakila@gmail.com">
+				</div>
+				<div class="form-group">
+					<input type="text" name="mobile" id="mobile" tabindex="1" class="form-control" placeholder="Mobile" value="0711746652">
+				</div>
+				<div class="form-group text-left">
+					<button type="button" id="btn_editform" tabindex="4" class="btn btn-green">Edit</button>
+					<button type="submit" name="save-submit" id="btn_saveform" tabindex="5" class="btn btn-green hidden" value="save-submit">Save Details</button>
+				</div>
+			</form>
+			</div>
 		</div>
 	</div>
 </div>
