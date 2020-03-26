@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>My Account DigitalCovid19</title>
-  <meta name="description" content="">
+  <title>My Profile - DigitalCovid19</title>
+  <meta name="description" content="My Profile - DigitalCovid19">
   <meta name="keywords" content="">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,46 +25,52 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript" src="js/main.js"></script>
- 
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+	
 </head>
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5">
-	<div class="row pt-5">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pt-5">
+<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+	<div class="row pt-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
+				<hr>
 				<a class="fnt-green" href="user_profile.php"><i class="fas fa-user"></i> Profile</a><br>
+				<hr>
 				<a class="fnt-green" href="user_symptoms.php"><i class="fas fa-heartbeat"></i> My Symptoms</a><br>
 				<hr>
 				<a class="fnt-green" href="user_transports.php"><i class="fas fa-bus-alt"></i> My Transports</a><br>
 				<hr>
-				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Event</a><br>
+				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Events</a><br>
 				<hr>
 				<a class="fnt-green" href="user_network.php"><i class="fas fa-users"></i> My Network</a><br>
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
 			<h2 class="fnt-green">My Profile Details</h2><br>
 			<div class="loginbox">
-				<form action="profile_editpage.php" method="post" role="form" id="editform">
+				<form>
 				<div class="form-group">
-					<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="Sakila jayasooriya">
+					<input required readonly type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="">
 				</div>
 				<div class="form-group">
-					<input type="text" name="nic" id="nic" tabindex="1" class="form-control" placeholder="NIC Number" value="941881513V">
+					<input required readonly type="text" name="nic" id="nic" tabindex="1" class="form-control" placeholder="NIC Number" value="">
 				</div>
 				<div class="form-group">
-					<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="sales4shakila@gmail.com">
+					<input required readonly type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
 				</div>
 				<div class="form-group">
-					<input type="text" name="mobile" id="mobile" tabindex="1" class="form-control" placeholder="Mobile" value="0711746652">
+					<input required readonly type="text" name="mobile" id="mobile" tabindex="1" class="form-control" placeholder="Mobile" value="">
 				</div>
 				<div class="form-group text-left">
 					<button type="button" id="btn_editform" tabindex="4" class="btn btn-green">Edit</button>
-					<button type="submit" name="save-submit" id="btn_saveform" tabindex="5" class="btn btn-green hidden" value="save-submit">Save Details</button>
+					<button type="button" name="save-submit" id="btn_saveform" tabindex="5" class="btn btn-green hidden" value="save-submit">Save Details</button>
 				</div>
 			</form>
 			</div>
@@ -91,5 +97,53 @@
 <footer>
 <?php require_once 'layout/footer.php'; ?>
 </footer>
+<script>
+	
+	var heroReference=firebase.database().ref().child("users");
+		heroReference.on("value",function(snapshot){
+		snapshot.forEach(function(childsnapshot){
+			var person=childsnapshot.val();
+			if(currentUser.email==person.email){
+				$("#name").val(person.username);
+				$("#nic").val(person.nic);
+				$("#email").val(person.email);
+				$("#mobile").val(person.mobile);
+			}
+		});
+	});
+
+	firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+			var email = user.email;
+			currentUser=user;
+		  } else {
+			window.location.href="index.php";
+		  }
+	});
+	$("#btn_editform").click(function()
+  	{
+		$("#name").removeAttr('readonly');
+		$("#mobile").removeAttr('readonly');
+	});
+
+	$("#btn_saveform").click(function()
+  	{
+		var detail ={
+				email:$("#email").val(),
+				mobile:$("#mobile").val(),
+				nic:$("#nic").val(),
+				username:$("#name").val()
+			}
+  			addDetail(detail);
+	});
+	function addDetail(d){
+		firebase.database().ref('users/' + d.nic).set(d);
+		$("#name").attr('readonly','readonly');
+		$("#mobile").attr('readonly','readonly');
+		$("#nic").attr('readonly','readonly');
+		$("#email").attr('readonly','readonly');
+		window.location.href="user_profile.php";
+	}
+</script>
 </body>
 </html>

@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>My Account DigitalCovid19</title>
-  <meta name="description" content="">
+  <title>My Connection - DigitalCovid19</title>
+  <meta name="description" content="My Connection - DigitalCovid19">
   <meta name="keywords" content="">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,26 +30,28 @@
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5">
-	<div class="row pt-5">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pt-5">
-			<div class="shadow-sm border userbox fnt-green">
+<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+	<div class="row pt-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
+			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
+				<hr>
 				<a class="fnt-green" href="user_profile.php"><i class="fas fa-user"></i> Profile</a><br>
+				<hr>
 				<a class="fnt-green" href="user_symptoms.php"><i class="fas fa-heartbeat"></i> My Symptoms</a><br>
 				<hr>
 				<a class="fnt-green" href="user_transports.php"><i class="fas fa-bus-alt"></i> My Transports</a><br>
 				<hr>
-				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Event</a><br>
+				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Events</a><br>
 				<hr>
 				<a class="fnt-green" href="user_network.php"><i class="fas fa-users"></i> My Network</a><br>
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5 fnt-gray">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray">
 			<h2 class="fnt-green">Connection Requests</h2><br>
 			<div class="container-fluid pb-5">
-				<div class="addedItems shadow-sm p-3 text-center">
+				<div class="addedContactItems shadow-sm p-3 text-center">
 					<p>
 						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
 						<small>Family</small><br>
@@ -58,7 +60,7 @@
 					<a class="btn btn-sm btn-green" href="user_network.php?id=1&action=confirm">Accept</a>
 					<a class="btn btn-sm btn-secondary" href="user_network.php?id=1&action=confirm">Reject</a>
 				</div>
-				<div class="addedItems shadow-sm p-3 text-center">
+				<div class="addedContactItems shadow-sm p-3 text-center">
 					<p>
 						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
 						<small>Relative</small><br>
@@ -67,7 +69,7 @@
 					<a class="btn btn-sm btn-green" href="user_network.php?id=1&action=confirm">Accept</a>
 					<a class="btn btn-sm btn-secondary" href="user_network.php?id=1&action=confirm">Reject</a>
 				</div>
-				<div class="addedItems shadow-sm p-3 text-center">
+				<div class="addedContactItems shadow-sm p-3 text-center">
 					<p>
 						<span class="fnt-green"><i class="fas fa-user"></i></span><br>
 						<small>Friend</small><br>
@@ -78,7 +80,7 @@
 				</div>
 			</div>
 			<h2 class="fnt-green">Add Connection</h2>
-			<div class="loginbox pl-3 pr-3">
+			<div class="loginbox pl-4 pr-3">
 				<form action="network_editpage.php" method="post" role="form">
 				<div class="form-group pt-3">
 					<label>He/She is my?</label><br>
@@ -115,7 +117,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input required type="text" name="contactDetail" id="contactDetail" class="form-control" placeholder="Put Selected Contact Detail">
+					<input required type="text" name="contactDetail" id="contactDetail" class="form-control" placeholder="Contact Details">
 				</div>
 				<div class="form-group text-left">
 					<button type="submit" name="save-submit" id="btn_saveform" class="btn btn-green" value="save-submit">Request connection</button>
@@ -170,6 +172,7 @@
 <?php require_once 'layout/footer.php'; ?>
 </footer>
 <script type="text/javascript">
+
 $('#public').click(function() {
       if ($(this).is(':checked')) {
             $('#withWhom').prop('disabled', true);
@@ -198,6 +201,27 @@ $('#bus').click(function() {
       if ($(this).is(':checked')) {
             $('#busNumber').prop('disabled', false);
             $('#route').prop('disabled', false);
+      }
+});
+
+$('#rname').click(function() {
+      if ($(this).is(':checked')) {
+        $('#contactDetail').attr('placeholder','Enter Name');
+      }
+});
+$('#nic').click(function() {
+      if ($(this).is(':checked')) {
+        $('#contactDetail').attr('placeholder','Enter NIC Number');
+      }
+});
+$('#email').click(function() {
+      if ($(this).is(':checked')) {
+        $('#contactDetail').attr('placeholder','Enter Email Address');
+      }
+});
+$('#phone').click(function() {
+      if ($(this).is(':checked')) {
+        $('#contactDetail').attr('placeholder','Enter Phone Number');
       }
 });
 </script>

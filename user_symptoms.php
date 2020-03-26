@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>My Account DigitalCovid19</title>
-  <meta name="description" content="">
+  <title>My Symptoms - DigitalCovid19</title>
+  <meta name="description" content="My Symptoms - DigitalCovid19">
   <meta name="keywords" content="">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,63 +25,71 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript" src="js/main.js"></script>
- 
+	
+  <script type="text/javascript" src="js/main.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
+	
 </head>
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5">
-	<div class="row pt-5">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pt-5">
+<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+	<div class="row pt-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
+				<hr>
 				<a class="fnt-green" href="user_profile.php"><i class="fas fa-user"></i> Profile</a><br>
+				<hr>
 				<a class="fnt-green" href="user_symptoms.php"><i class="fas fa-heartbeat"></i> My Symptoms</a><br>
 				<hr>
 				<a class="fnt-green" href="user_transports.php"><i class="fas fa-bus-alt"></i> My Transports</a><br>
 				<hr>
-				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Event</a><br>
+				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Events</a><br>
 				<hr>
 				<a class="fnt-green" href="user_network.php"><i class="fas fa-users"></i> My Network</a><br>
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pt-5 fnt-gray">
-			<h2 class="fnt-green">My Symptoms</h2><br>
-			<p><b>Current :</b> Fever | Breathing Difficulties | Headache</p>
-			<p><b>Abroad :</b> China (12/12/2019 - 22/02/2020)</p><br><br>
-			<h2 class="fnt-green">Update My Symptoms</h2><br>
+		<div  class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray ">
+			<div class="well" id="show-symptoms">
+				
+			</div>
 			<div class="loginbox">
-				<form action="symptoms_editpage.php" method="post" role="form" id="">
+			<h2 class="fnt-green">Update My Symptoms</h2><br>
+				<form>
 				<div class="form-check">
 				  <label class="form-check-label">
-				    <input type="checkbox" class="form-check-input" value="breathing_difficulties">Breathing Difficulties
+				    <input id="breathing" type="checkbox" class="form-check-input" value="breathing_difficulties">Breathing Difficulties
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
-				    <input type="checkbox" class="form-check-input" value="fever">Fever
+				    <input id="ferver" type="checkbox" class="form-check-input" value="fever">Fever
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
-				    <input type="checkbox" class="form-check-input" value="headache">Headache
+				    <input id="headache" type="checkbox" class="form-check-input" value="headache">Headache
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
-				    <input type="checkbox" class="form-check-input" value="cough">Cough
+				    <input id="cough" type="checkbox" class="form-check-input" value="cough">Cough
 				  </label>
 				</div>
 				<div class="form-check">
 				  <label class="form-check-label">
-				    <input type="checkbox" class="form-check-input" value="sore_throat">Sore throat
+				    <input id="sore_throat" type="checkbox" class="form-check-input" value="sore_throat">Sore throat
 				  </label>
 				</div>
 				<div class="form-group pt-3">
-					<label>Are you been abroad?</label><br>
+					<label>Have you been abroad?</label><br>
 					<div class="custom-control custom-radio custom-control-inline">
-					    <input type="radio" class="custom-control-input" id="abroadid" name="abroad" value="abroad">
+					    <input checked type="radio" class="custom-control-input" id="abroadid" name="abroad" value="abroad">
 					    <label class="custom-control-label" for="abroadid">Yes</label>
 					 </div>
 					<div class="custom-control custom-radio custom-control-inline">
@@ -101,14 +109,14 @@
 			  	</div>
 				<div class="form-group">
 				 <label >From</label>
-				 <input type="date" id="abroadFrom" name="abroadFrom" max="3000-12-31" min="1000-01-01" class="form-control">
+				 <input required type="date" id="abroadFrom" name="abroadFrom" max="3000-12-31" min="1000-01-01" class="form-control">
 				</div>
 				<div class="form-group">
 				 <label >To</label>
-				 <input type="date" id="abroadTo" name="abroadTo" min="1000-01-01" max="3000-12-31" class="form-control">
+				 <input required type="date" id="abroadTo" name="abroadTo" min="1000-01-01" max="3000-12-31" class="form-control">
 				</div>
 				<div class="form-group text-left">
-					<button type="submit" name="save-submit" id="btn_saveform" tabindex="5" class="btn btn-green" value="save-submit">Update Symptoms</button>
+					<button type="button" name="save-submit" id="btn_saveform" tabindex="5" class="btn btn-green" value="save-submit">Update Symptoms</button>
 				</div>
 			</form>
 			</div>
@@ -150,6 +158,102 @@ $('#abroadid').click(function() {
             $('#country').prop('disabled', false);
       }
 });
+$("#btn_saveform").click(function(){
+	var breathing =$('#breathing').prop('checked');
+	var ferver =$('#ferver').prop('checked');
+	var headache =$('#headache').prop('checked');
+	var cough =$('#cough').prop('checked');
+	var sore_throat =$('#sore_throat').prop('checked');
+	var abroad =$('#abroadid').prop('checked');
+
+	if($('#abroadid').prop('checked')){
+		var country=$('#country').val();
+		var abroadFrom=$('#abroadFrom').val();
+		var abroadTo=$('#abroadTo').val();
+	}else{
+        var country="";
+        var abroadFrom="";
+        var abroadTo="";
+	}
+	var da=abroadFrom+ "<->"+ abroadTo;
+	
+	if((abroadFrom=="" ||abroadTo=="" ||country=="" )&& $('#abroadid').prop('checked')){
+		window.alert("Please fill out all the fields")
+	}else if(abroadFrom>abroadTo){
+		window.alert("Date is wrongly entered")
+	}else{
+		var symptoms ={
+			abroad:$('#abroadid').prop('checked'),
+			breathin:breathing,
+			cough:cough,
+			country:country,
+  			date:da,
+  			ferver:ferver,
+  			headache:headache,
+  			throat:sore_throat
+		  }
+		  addSymptom(symptoms);
+	}
+});	
+var nic="";
+var userReference=firebase.database().ref().child("users");
+userReference.on("value",function(snapshot){
+	snapshot.forEach(function(childsnapshot){
+		var person=childsnapshot.val();
+		if(currentUser.email==person.email){
+			nic =person.nic;
+		}
+	});
+});
+function addSymptom(d){
+	firebase.database().ref('symptoms/' + nic).set(d);
+	window.alert("Symptoms are Updated")
+}
+firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+			var email = user.email;
+			currentUser=user;
+		  } else {
+			window.location.href="index.php";
+		  }
+});
+var symptomsReference=firebase.database().ref().child("symptoms");
+
+symptomsReference.on("value",function(snapshot){
+	$("#show-symptoms").empty();
+	var heroHTMLItems="<h2 class='fnt-green'>My Symptoms</h2><br>";
+	var mess=0;
+	snapshot.forEach(function(childsnapshot){
+		var symptom=childsnapshot.val();
+		if(childsnapshot.key==nic){
+			heroHTMLItems+="<p><b>Current :</b>";
+			if(symptom.breathin==true){
+				heroHTMLItems+="Breathing Difficulties |";
+			}if(symptom.ferver==true){
+				heroHTMLItems+=" Ferver |";
+			}if(symptom.headache==true){
+				heroHTMLItems+="Headache |";
+			}if(symptom.cough==true){
+				heroHTMLItems+="Cough |";
+			}if(symptom.throat==true){
+				heroHTMLItems+="Sore throat |";
+			}
+			heroHTMLItems+="</p>";
+			if(symptom.abroad==true){
+				heroHTMLItems+="</p><p><b>Abroad :</b>"+symptom.country +" ("+symptom.date+")</p><br><br>";
+			}else{
+				heroHTMLItems+="</p><p><b>Abroad : </b>Not</p><br><br>";
+			}
+			mess=1;
+		}
+		
+	});
+	if(mess==0){
+			heroHTMLItems+="<p align='left'>No current symptoms</p><br><br>";
+	}
+$("#show-symptoms").html(heroHTMLItems);
+});
+
 </script>
 </body>
 </html>

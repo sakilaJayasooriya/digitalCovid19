@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title>My Account DigitalCovid19</title>
-  <meta name="description" content="">
+  <title>My Account - DigitalCovid19</title>
+  <meta name="description" content="My Account - DigitalCovid19">
   <meta name="keywords" content="">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,28 +30,30 @@
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5">
-	<div class="row pt-5">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pt-5">
+<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+	<div class="row pt-4 pr-0">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
+				<hr>
 				<a class="fnt-green" href="user_profile.php"><i class="fas fa-user"></i> Profile</a><br>
+				<hr>
 				<a class="fnt-green" href="user_symptoms.php"><i class="fas fa-heartbeat"></i> My Symptoms</a><br>
 				<hr>
 				<a class="fnt-green" href="user_transports.php"><i class="fas fa-bus-alt"></i> My Transports</a><br>
 				<hr>
-				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Event</a><br>
+				<a class="fnt-green" href="user_events.php"><i class="fas fa-calendar-alt"></i> My Events</a><br>
 				<hr>
 				<a class="fnt-green" href="user_network.php"><i class="fas fa-users"></i> My Network</a><br>
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
 			<img class="img-fluid" src="img/map.jpg">
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 pr-0 float-right">
 			<h2 class="fnt-green text-center">Activities</h2>
-			<div class="container-fluid pt-1 pb-5">
+			<div class="pt-1 pb-5 text-right">
 				<div class="notif-red shadow-sm p-3 text-center">
 					<p>
 						<span class="fnt-red h2"><i class="fas fa-heartbeat"></i></span><br>
@@ -94,5 +96,15 @@
 <footer>
 <?php require_once 'layout/footer.php'; ?>
 </footer>
+<script>
+	firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    var email = user.email;
+		    currentUser=user;
+		  } else {
+			window.location.href="index.php";
+		  }
+	});
+</script>
 </body>
 </html>

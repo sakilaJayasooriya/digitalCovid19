@@ -35,12 +35,12 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pt-5 text-center">
       <div class="shadow-sm border loginbox p-5 mx-auto">
         <h2>Reset Your Password</h2><br>
-        <form action="reset.php" method="post" role="form">
+        <form >
           <div class="form-group">
-            <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address">
+            <input required type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address">
           </div>
           <div class="form-group text-center">
-            <button type="submit" name="reset-pswd" id="reset-pswd" tabindex="4" class="btn btn-green pl-5 pr-5" value="reset-pswd">Reset Password</button>
+            <button type="button" name="reset-pswd" id="reset-pswd" tabindex="4" class="btn btn-green pl-5 pr-5" value="reset-pswd">Reset Password</button>
           </div>
         </form>
       </div>
@@ -66,5 +66,19 @@
 <footer>
 <?php require_once 'layout/footer.php'; ?>
 </footer>
+<script>
+$("#reset-pswd").click(function()
+  	{
+  		var auth = firebase.auth();
+		var emailAddress = $("#email").val();
+		auth.sendPasswordResetEmail(emailAddress).then(function() {
+
+		}).catch(function(error) {
+
+		});
+     window.alert("Please check your emails for the password reset link")
+     window.location.href="index.php";
+});
+</script>
 </body>
 </html>

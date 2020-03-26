@@ -130,10 +130,10 @@ a.fnt-white:hover{
 }
 .safeStatus{
 	border-radius: 25px 25px 25px 25px;
-	margin-top: 12px;
+	margin-top: 14px;
 	margin-right: -50px;
-	padding-top: 13px;
-	padding-bottom: 1px;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	padding-left: 30px;
 	padding-right: 60px;
 	background-color: #fff;
@@ -151,6 +151,16 @@ a.fnt-white:hover{
 	border: 1px solid #4cad5c;
 	border-radius: 20px;
 	margin: 5px 10px;
+	width: 200px;
+	overflow: hidden;
+}
+.addedContactItems{
+	display: inline-block;
+	border: 1px solid #4cad5c;
+	border-radius: 20px;
+	margin: 5px 10px;
+	width: 300px;
+	overflow: hidden;
 }
 .notif-green{
 	border: 1px solid #4cad5c;

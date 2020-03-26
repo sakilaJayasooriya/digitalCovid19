@@ -10,7 +10,7 @@
 		<h4 class="text-left fnt-green">Contact</h4>
 		<p class="text-left fnt-white">
 			<i class="fa fa-envelope" ></i> <a class="fnt-white" href="mailto:Info@digitalcovid19.lk" target="_blank">Info@digitalcovid19.lk </a><br>
-			<i class="fa fa-phone" ></i> +947100000 <br>
+			<i class="fa fa-phone" ></i> <a class="fnt-white" href="tel:+947100000">+947100000</a> <br>
 		</p>
 	
 	</div>
