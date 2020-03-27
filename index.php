@@ -32,7 +32,9 @@
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-storage.js"></script>
-	
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtu-gWA2AQO5HqQUAcsEQzZUOsKiSSIAI&libraries=places&callback=initMap">
+  </script>
+
 <script>
 	var firebaseConfig = {
 		apiKey: "AIzaSyBajmU8YO4CDBQylzFwquZBPLf4ugW3NnQ",
@@ -48,13 +50,25 @@
   	firebase.initializeApp(firebaseConfig);
   	firebase.auth.Auth.Persistence.LOCAL;
 </script>
+<style>
+    #myMap {
+      padding: 10px;
+       height: 350px;
+       width: 100%;
+    }
+    #main{
+      background-color: lightgreen;
+      height: 450px;
+      width: 100%;
+    }
+</style>
 </head>
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
-	<div class="row pt-4">
-		<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 pl-4">
+<div class="container-fluid mt-5 pt-5 pb-5">
+	<div class="row pt-4 pb-4">
+		<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 pl-4 pr-4 pb-4">
 			<div class="shadow-sm border loginbox">
 				<!-- Nav tabs -->
 				  <ul class="nav nav-tabs pt-4 pl-3 pr-3" role="tablist">
@@ -123,8 +137,9 @@
 				  </div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 text-center">
-			<img class="img-fluid pt-0 mt-0" src="img/map.jpg">
+		<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 text-center pl-2 pr-2">
+			<p class="text-left fnt-green">Please drag the marker to your location</p>
+			<div id="myMap"></div>
 		</div>
 	</div>
 </div>
@@ -141,20 +156,84 @@
 </div>
 <div class="container-fluid bg-light">
 	<div class="row pt-5 pb-5 pl-2 pr-2">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-2 pb-3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fnt-green">
 			<h1><b>Download our app </b></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-1">
 			<p class="text-justify">You can download android/iso app from follow links. Then register and update your information this will usefull for prevent the virus spreding in sri lanka</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/playstore.png" alt="playstore" class="img-fluid"></a>
 			
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/appstore.png" alt="appstore" class="img-fluid"></a>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
+	var map;
+	var marker;
+	var myLatlng = new google.maps.LatLng(6.927079,79.861244);
+	var geocoder = new google.maps.Geocoder();
+	var infowindow = new google.maps.InfoWindow();
+	var clat;
+	var clng;
+	var lat11="6.927079";
+	var long11="79.861244";
+	function initialize(){
+	var mapOptions = {
+	zoom: 18,
+	center: myLatlng,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+	marker = new google.maps.Marker({
+	map: map,
+	position: myLatlng,
+	draggable: true 
+	}); 
+
+	geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+		if (results[0]) {
+			$('#latitude,#longitude').show();
+			$('#address').val(results[0].formatted_address);
+			$('#latitude').val(marker.getPosition().lat());
+			lat11=marker.getPosition().lat();
+			$('#longitude').val(marker.getPosition().lng());
+			long11=marker.getPosition().lng();
+			infowindow.setContent(results[0].formatted_address);
+			infowindow.open(map, marker);
+			clat=marker.getPosition().lat();
+			clng=marker.getPosition().lng();
+		}
+		}
+	});
+
+	google.maps.event.addListener(marker, 'dragend', function() {
+
+		geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+			$('#address').val(results[0].formatted_address);
+			$('#latitude').val(marker.getPosition().lat());
+			lat11=marker.getPosition().lat();
+			$('#longitude').val(marker.getPosition().lng());
+			long11=marker.getPosition().lng();
+			infowindow.setContent(results[0].formatted_address);
+			infowindow.open(map, marker);
+			clat=marker.getPosition().lat();
+			clng=marker.getPosition().lng();
+			}
+		}
+		});
+	});
+
+	}
+	google.maps.event.addDomListener(window, 'load', initialize);
 	$("#gotologin").click(function(){
 	    $("#home").tab('show');
 	});
@@ -182,13 +261,17 @@
 			window.alert("please fill out all Form field")
 		}else if(rPassword!=cpassword){
 			window.alert("Confirmation password and Password are not same ")
-		}else if(rPassword.toString().length<6){
-			window.alert("Password should be at least 6 characters")
+		}else if(rPassword.toString().length<8){
+			window.alert("Password should be at least 8 characters")
+		}else if(lat11=="6.927079" && long11=="79.861244"){
+			window.alert("Please add your currunt location")
 		}else{
 			CreateNewUser(email,rPassword);
 			window.alert("Your account is Created")
 			var detail ={
 				email:$("#regEmail").val(),
+				lat:lat11,
+				long:long11,
 				mobile:$("#mobile").val(),
 				nic:$("#nic").val(),
 				username:$("#username").val()

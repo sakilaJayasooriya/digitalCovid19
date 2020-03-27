@@ -23,16 +23,29 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtu-gWA2AQO5HqQUAcsEQzZUOsKiSSIAI&libraries=places&callback=initMap">
+</script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script type="text/javascript" src="js/main.js"></script>
- 
+  <style>
+    #myMap {
+      padding: 0px;
+      height: 400px;
+      width: 100%;
+    }
+    #main{
+      background-color: lightgreen;
+      height: 450px;
+      width: 780px;
+    }
+</style>
 </head>
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+<div class="container-fluid mt-5 pt-5 pb-5">
 	<div class="row pt-4 pr-0">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4 pr-4 pb-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
 				<hr>
@@ -48,10 +61,7 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
-			<img class="img-fluid" src="img/map.jpg">
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 pr-0 float-right">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-3">
 			<h2 class="fnt-green text-center">Activities</h2>
 			<div class="pt-1 pb-5 text-right">
 				<div class="notif-red shadow-sm p-3 text-center">
@@ -74,19 +84,25 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 pr-4">
+			<div id="myMap"></div>
+			
+		</div>
 	</div>
 </div>
 <div class="container-fluid bg-light">
 	<div class="row pt-5 pb-5 pl-2 pr-2">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-2 pb-3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fnt-green">
 			<h1><b>Download our app </b></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-1">
 			<p class="text-justify">You can download android/iso app from follow links. Then register and update your information this will usefull for prevent the virus spreding in sri lanka</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/playstore.png" alt="playstore" class="img-fluid"></a>
 			
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/appstore.png" alt="appstore" class="img-fluid"></a>
 		</div>
 	</div>
@@ -97,6 +113,8 @@
 <?php require_once 'layout/footer.php'; ?>
 </footer>
 <script>
+	var lat="6.927079";
+	var long="79.861244";
 	firebase.auth().onAuthStateChanged(function(user) {
 		  if (user) {
 		    var email = user.email;
@@ -105,6 +123,77 @@
 			window.location.href="index.php";
 		  }
 	});
+	var userReference=firebase.database().ref().child("users");
+	userReference.on("value",function(snapshot){
+		snapshot.forEach(function(childsnapshot){
+			var person=childsnapshot.val();
+			if(currentUser.email==person.email){
+				lat=person.lat;
+				long=person.long;
+			}
+		});
+	});
+	
+	var map;
+	var marker;
+	var myLatlng = new google.maps.LatLng(lat,long);
+	var geocoder = new google.maps.Geocoder();
+	var infowindow = new google.maps.InfoWindow();
+	var clat;
+	var clng;
+	setTimeout(
+	function initialize(){
+		var map;
+		var marker;
+		var myLatlng = new google.maps.LatLng(lat,long);
+		var geocoder = new google.maps.Geocoder();
+		var infowindow = new google.maps.InfoWindow();
+		var clat;
+		var clng;
+		var mapOptions = {
+			zoom: 18,
+			center: myLatlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+		marker = new google.maps.Marker({
+			map: map,
+			position: myLatlng,
+			draggable: true 
+		}); 
+		geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				if (results[0]) {
+					$('#latitude,#longitude').show();
+					$('#address').val(results[0].formatted_address);
+					$('#latitude').val(marker.getPosition().lat());
+					$('#longitude').val(marker.getPosition().lng());
+					infowindow.setContent(results[0].formatted_address);
+					infowindow.open(map, marker);
+					clat=marker.getPosition().lat();
+					clng=marker.getPosition().lng();
+				}
+			}
+		});
+		google.maps.event.addListener(marker, 'dragend', function() {
+			geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					if (results[0]) {
+						$('#address').val(results[0].formatted_address);
+						$('#latitude').val(marker.getPosition().lat());
+						$('#longitude').val(marker.getPosition().lng());
+						infowindow.setContent(results[0].formatted_address);
+						infowindow.open(map, marker);
+						clat=marker.getPosition().lat();
+						clng=marker.getPosition().lng();
+					}
+				}
+			});
+		});
+	}, 3000 );
+	google.maps.event.addDomListener(window, 'load', initialize);	
+
 </script>
 </body>
 </html>

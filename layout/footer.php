@@ -1,6 +1,6 @@
 <div class="container-fluid bg-dark">
   <div class="row pt-5 pl-5">
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pb-3">
 		<h4 class="text-left fnt-green">Usefull Links</h4>
 		<a class="fnt-white" href="/">Home</a><br>
 		<a class="fnt-white" href="/about.php">About Us</a><br>

@@ -34,9 +34,9 @@
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+<div class="container-fluid mt-5 pt-5 pb-5">
 	<div class="row pt-4">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4 pr-4 pb-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
 				<hr>
@@ -52,9 +52,9 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 pl-2 pr-2">
 			<h2 class="fnt-green">My Profile Details</h2><br>
-			<div class="loginbox">
+			<div class="loginbox pl-4 pr-4">
 				<form>
 				<div class="form-group">
 					<input required readonly type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Name" value="">
@@ -79,15 +79,17 @@
 </div>
 <div class="container-fluid bg-light">
 	<div class="row pt-5 pb-5 pl-2 pr-2">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-2 pb-3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fnt-green">
 			<h1><b>Download our app </b></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-1">
 			<p class="text-justify">You can download android/iso app from follow links. Then register and update your information this will usefull for prevent the virus spreding in sri lanka</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/playstore.png" alt="playstore" class="img-fluid"></a>
 			
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/appstore.png" alt="appstore" class="img-fluid"></a>
 		</div>
 	</div>
@@ -137,12 +139,16 @@
   			addDetail(detail);
 	});
 	function addDetail(d){
-		firebase.database().ref('users/' + d.nic).set(d);
-		$("#name").attr('readonly','readonly');
-		$("#mobile").attr('readonly','readonly');
-		$("#nic").attr('readonly','readonly');
-		$("#email").attr('readonly','readonly');
-		window.location.href="user_profile.php";
+		if( d.nic==""){
+			window.alert("User are not updated please try Again")
+		}else{
+			firebase.database().ref('users/' + d.nic).set(d);
+			$("#name").attr('readonly','readonly');
+			$("#mobile").attr('readonly','readonly');
+			$("#nic").attr('readonly','readonly');
+			$("#email").attr('readonly','readonly');
+			window.location.href="user_profile.php";
+		}
 	}
 </script>
 </body>

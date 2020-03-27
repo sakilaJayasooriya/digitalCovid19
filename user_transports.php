@@ -30,9 +30,9 @@
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+<div class="container-fluid mt-5 pt-5 pb-5">
 	<div class="row pt-4">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4 pr-4 pb-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
 				<hr>
@@ -48,9 +48,9 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray pl-2 pr-2">
 			<h2 class="fnt-green pl-1">Add New Travel</h2>
-			<div class="loginbox pl-4">
+			<div class="loginbox pl-4 pr-4">
 				<form action="transport_editpage.php" method="post" role="form">
 				<div class="form-group pt-3">
 					<label>What type of transportation did you used to travel?</label><br>
@@ -93,8 +93,8 @@
 				</div>
 			</form>
 			</div><br>
-			<h2 class="fnt-green pl-1">My Travels</h2><br>
-			<div class="container-fluid">
+			<h2 class="fnt-green">My Travels</h2><br>
+			<div class="container-fluid text-center">
 				<div class="addedItems shadow-sm p-3 text-center">
 					<p class="fnt-green"><i class="fas fa-bus-alt"></i></p>
 					<p><small>2020-03-02</small><br>
@@ -133,15 +133,17 @@
 </div>
 <div class="container-fluid bg-light">
 	<div class="row pt-5 pb-5 pl-2 pr-2">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-2 pb-3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fnt-green">
 			<h1><b>Download our app </b></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-1">
 			<p class="text-justify">You can download android/iso app from follow links. Then register and update your information this will usefull for prevent the virus spreding in sri lanka</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/playstore.png" alt="playstore" class="img-fluid"></a>
 			
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/appstore.png" alt="appstore" class="img-fluid"></a>
 		</div>
 	</div>

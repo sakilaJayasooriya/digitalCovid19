@@ -33,9 +33,9 @@
 
 <body>
 <?php require_once 'layout/head.php'; ?>
-<div class="container-fluid mt-5 pt-5 pb-5 pr-0">
+<div class="container-fluid mt-5 pt-5 pb-5">
 	<div class="row pt-4">
-		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 pl-4 pr-4 pb-4">
 			<div class="shadow-sm border userbox">
 				<a class="fnt-green" href="user.php"><i class="fas fa-poll"></i> Dashboard</a><br>
 				<hr>
@@ -51,9 +51,9 @@
 				
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 fnt-gray pl-2 pr-2">
 			<h2 class="fnt-green pl-1">Attending an Event</h2>
-			<div class="loginbox pl-4 pt-2">
+			<div class="loginbox pl-4 pr-4 pt-2">
 				<form >
 				<div class="form-group">
 					<input required type="text" name="eventName" id="eventName" class="form-control" placeholder="Event Name">
@@ -71,7 +71,7 @@
 			</form>
 			</div><br>
 			<h2 class="fnt-green pl-1">My Events</h2><br>
-			<div id="showEvent" class="container-fluid">
+			<div id="showEvent" class="container-fluid text-center">
 				
 			</div>
 		</div>
@@ -79,15 +79,17 @@
 </div>
 <div class="container-fluid bg-light">
 	<div class="row pt-5 pb-5 pl-2 pr-2">
-		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-2 pb-3">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 fnt-green">
 			<h1><b>Download our app </b></h1>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 fnt-green pt-1">
 			<p class="text-justify">You can download android/iso app from follow links. Then register and update your information this will usefull for prevent the virus spreding in sri lanka</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/playstore.png" alt="playstore" class="img-fluid"></a>
 			
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3 pt-5">
+		<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3">
 			<a href=""><img src="img/appstore.png" alt="appstore" class="img-fluid"></a>
 		</div>
 	</div>
@@ -133,9 +135,15 @@
 		}
 	});
 	function addEvent(e){
-		firebase.database().ref('events/' + e.name).set(e);
-		firebase.database().ref('eventWiseUsers/' + e.name+"/"+currentUser.uid).set(nic);
-		window.alert("Events are Updated")
+		if(e.name==""){
+			window.alert("Event are not updated please try Again")
+		}else{
+			firebase.database().ref('events/' + e.name).set(e);
+			firebase.database().ref('eventWiseUsers/' + e.name+"/"+currentUser.uid).set(nic);
+			firebase.database().ref('userWiseEvents/' + nic+"/"+currentUser.uid+Date.now()+"/").set(e.name);
+			firebase.database().ref('userWiseDates/' + nic+"/"+currentUser.uid+Date.now()+"/").set(e.date);
+			window.alert("Events are Updated")
+		}
 	}
 	var EventsReference=firebase.database().ref().child("events");
 	EventsReference.on("value",function(snapshot){

@@ -152,6 +152,7 @@ a.fnt-white:hover{
 	border-radius: 20px;
 	margin: 5px 10px;
 	width: 200px;
+	height: 250px;
 	overflow: hidden;
 }
 .addedContactItems{
@@ -160,6 +161,7 @@ a.fnt-white:hover{
 	border-radius: 20px;
 	margin: 5px 10px;
 	width: 300px;
+	height: 250px;
 	overflow: hidden;
 }
 .notif-green{
